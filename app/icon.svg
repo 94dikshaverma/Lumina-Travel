@@ -1,0 +1,6 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="256" height="256" fill="#1a1a1a" rx="48"/>
+  <!-- Lumina Star/Compass Icon -->
+  <path d="M128 40 L145 111 L216 128 L145 145 L128 216 L111 145 L40 128 L111 111 Z" fill="#c5a059"/>
+</svg>
