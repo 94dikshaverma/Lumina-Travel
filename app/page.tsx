@@ -3,10 +3,22 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const HERO_IMAGES = [
-  "/hero-bg.png",
-  "/service_international.png",
-  "/service_honeymoon.png"
+const HERO_SLIDES = [
+  {
+    src: "/hero-bg.png",
+    title: "Plan Your Perfect Journey — Without the Stress",
+    subtitle: "Tailored luxury travel experiences designed just for you, down to the finest detail."
+  },
+  {
+    src: "/service_international.png",
+    title: "Explore the World's Most Iconic Destinations",
+    subtitle: "Exclusive VIP access to breathtaking international landmarks and vibrant cultures."
+  },
+  {
+    src: "/service_honeymoon.png",
+    title: "Romantic Escapes Designed for Two",
+    subtitle: "Celebrate your love in secluded, luxurious settings with premium amenities."
+  }
 ];
 
 export default function Home() {
@@ -14,7 +26,7 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % HERO_IMAGES.length);
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
@@ -31,18 +43,18 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">
-          {HERO_IMAGES.map((src, index) => (
+          {HERO_SLIDES.map((slide, index) => (
             <div
-              key={src}
+              key={slide.src}
               className={`slider-image ${index === currentSlide ? 'active' : ''}`}
             >
-              <Image src={src} alt={`Luxury destination ${index + 1}`} fill priority={index === 0} style={{ objectFit: 'cover' }} quality={90} />
+              <Image src={slide.src} alt={`Luxury destination ${index + 1}`} fill priority={index === 0} style={{ objectFit: 'cover' }} quality={90} />
             </div>
           ))}
           <div className="hero-overlay"></div>
           
           <div className="slider-controls">
-            {HERO_IMAGES.map((_, index) => (
+            {HERO_SLIDES.map((_, index) => (
               <button 
                 key={index} 
                 className={`slider-dot ${index === currentSlide ? 'active' : ''}`}
@@ -52,9 +64,9 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="hero-content">
-          <h1>Plan Your Perfect Journey — Without the Stress</h1>
-          <p>Tailored travel experiences designed just for you, down to the finest detail.</p>
+        <div className="hero-content" key={currentSlide}>
+          <h1>{HERO_SLIDES[currentSlide].title}</h1>
+          <p>{HERO_SLIDES[currentSlide].subtitle}</p>
           <div className="hero-buttons">
             <Link href="#plan" className="btn btn-primary">Plan My Trip</Link>
             <Link href="#whatsapp" className="btn btn-secondary">
